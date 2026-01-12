@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Education Website Revamp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap');
+        
+        :root {
+            --primary: #0056a6;
+            --secondary: #f8b739;
+            --accent: #28a745;
+            --dark: #1a365d;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Source Serif Pro', serif;
+            font-weight: 550;
+            color: #384d6c;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo img {
+            height: 45px;
+            transition: all 0.3s ease;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            z-index: 10;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f5f9ff;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .cta-button {
+            background: linear-gradient(to right, var(--primary), #0077cc);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 166, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 86, 166, 0.3);
+        }
+        
+        .cta-button.secondary {
+            background: linear-gradient(to right, var(--secondary), #f9c34e);
+            box-shadow: 0 4px 15px rgba(248, 183, 57, 0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 86, 166, 0.9) 0%, rgba(26, 54, 93, 0.9) 100%), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 0 100px;
+            margin-top: 75px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Programs */
+        .programs-container {
+            position: relative;
+        }
+        
+        .program-slider {
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .swiper-slide {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            height: auto;
+        }
+        
+        .program-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .program-info {
+            padding: 25px;
+        }
+        
+        .program-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .program-info p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .program-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            background: #e9f5ff;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary);
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 20px;
+        }
+        
+        /* Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .insight-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .insight-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .insight-content {
+            padding: 25px;
+        }
+        
+        .insight-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .insight-meta {
+            display: flex;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .insight-meta span {
+            margin-right: 15px;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Accordion */
+        .accordion-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 10px;
+        }
+        
+        .accordion-header {
+            padding: 20px 0;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-header i {
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-header.active i {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--gray);
+        }
+        
+        .accordion-content p {
+            padding-bottom: 20px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo p {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        .footer-links h3, .footer-newsletter h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-newsletter p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border-radius: 30px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                max-width: 250px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header style="padding: 0px;background-color:#1a365d;color: #5f5050;">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="https://www.ebec.co/assets/img/logo.png" alt="EBEC Logo">
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul style="color: white;" class="nav-links" id="navLinks">
+                    <li><a  style="color: white;" href="#home">Home</a></li>
+                    <li class="dropdown">
+                        <a style="color: white;" href="#services">Services <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Educational Consulting</a>
+                            <a href="#">Business Development</a>
+                            <a href="#">Economic Research</a>
+                            <a href="#">Training Programs</a>
+                        </div>
+                    </li>
+                    <li><a style="color: white;" href="#programs">Programs</a></li>
+                    <li><a  style="color: white;" href="#insights">Insights</a></li>
+                    <li><a style="color: white;" href="#about">About</a></li>
+                    <li><a style="color: white;" href="#contact">Contact</a></li>
+                    <li><a  href="#" style="width:105px;height:36px;text-align:center;color: white;" class="cta-button">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <body style="margin:0; padding:0;">
+
+<section id="home"
+style="
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://i.postimg.cc/zGH01fLM/business-consulting2.png');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+">
+
+    <!-- Very light overlay (0.05) -->
+    <div style="
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    "></div>
+
+    <div
+    style="
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+        color: #ffffff;
+    ">
+
+        <h1
+        style="
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.35);
+        "><br><br><br>
+            Transforming Education Through Business &amp; Economic Consulting
+        </h1>
+
+        <p
+        style="
+            max-width: 850px;
+            margin: 0 auto 35px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #f5f5f5;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        ">
+            EBEC provides strategic insights and innovative solutions to educational institutions, governments, and organizations worldwide, fostering sustainable growth and development.
+        </p>
+
+        <div style="
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        ">
+            <a href="#"
+            style="
+                padding: 14px 30px;
+                background: #0d6efd;
+                color: #ffffff;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 6px;
+            ">
+                Explore Our Services
+            </a>
+
+            <a href="#"
+            style="
+                padding: 14px 30px;
+                background: transparent;
+                color: #ffffff;
+                text-decoration: none;
+                font-weight: 600;
+                border: 2px solid #ffffff;
+                border-radius: 6px;
+            ">
+                View Programs
+            </a>
+        </div>
+
+    </div>
+</section>
+
+    <!-- <section class="hero" id="home" data-aos="fade-up">
+        <div class="container">
+            <h1 data-aos="fade-up" data-aos-delay="100">Transforming Education Through Business & Economic Consulting</h1>
+            <p data-aos="fade-up" data-aos-delay="200">EBEC provides strategic insights and innovative solutions to educational institutions, governments, and organizations worldwide, fostering sustainable growth and development.</p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="300">
+                <a href="#services" class="cta-button">Explore Our Services</a>
+                <a href="#programs" class="cta-button secondary">View Programs</a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our Services</h2>
+                <p>Comprehensive consulting and development services tailored to the education sector's unique challenges and opportunities.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://i.postimg.cc/v86rBK8T/Educational-Consulting.png?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Educational Consulting">
+                    <div class="service-content">
+                        <h3>Educational Consulting</h3>
+                        <p>Strategic guidance for educational institutions to enhance curriculum, pedagogy, and institutional effectiveness in a rapidly changing global landscape.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Business Development">
+                    <div class="service-content">
+                        <h3>Business Development</h3>
+                        <p>Helping educational organizations build sustainable revenue models, forge strategic partnerships, and expand their market presence.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Economic Research">
+                    <div class="service-content">
+                        <h3>Economic Research</h3>
+                        <p>Data-driven analysis and policy recommendations to support education investment decisions and measure socioeconomic impact.</p>
+                        <a href="#" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our Programs</h2>
+                <p>Specialized training and development programs designed to build capacity and drive innovation in education.</p>
+            </div>
+            
+            <div class="programs-container" data-aos="fade-up">
+                <div class="swiper program-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Leadership Development" class="program-image">
+                            <div class="program-info">
+                                <h3>Educational Leadership Development</h3>
+                                <p>Comprehensive program for current and aspiring educational leaders focusing on strategic management, innovation, and change leadership.</p>
+                                <div class="program-tags">
+                                    <span class="tag">Executive Education</span>
+                                    <span class="tag">6 Months</span>
+                                    <span class="tag">Online & In-person</span>
+                                </div>
+                                <a href="#" class="cta-button">Program Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="EdTech Innovation" class="program-image">
+                            <div class="program-info">
+                                <h3>EdTech Innovation & Integration</h3>
+                                <p>Hands-on training for educators and administrators on effectively integrating technology to enhance teaching and learning outcomes.</p>
+                                <div class="program-tags">
+                                    <span class="tag">Technology</span>
+                                    <span class="tag">3 Months</span>
+                                    <span class="tag">Hybrid Format</span>
+                                </div>
+                                <a href="#" class="cta-button">Program Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Policy Analysis" class="program-image">
+                            <div class="program-info">
+                                <h3>Education Policy Analysis</h3>
+                                <p>Advanced training in analyzing, developing, and implementing effective education policies for government and institutional leaders.</p>
+                                <div class="program-tags">
+                                    <span class="tag">Policy</span>
+                                    <span class="tag">4 Months</span>
+                                    <span class="tag">Online</span>
+                                </div>
+                                <br><br>
+                                <a href="#" class="cta-button">Program Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section id="insights">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Latest Insights</h2>
+                <p>Research, articles, and reports on the latest trends in education, business, and economic development.</p>
+            </div>
+            
+            <div class="insights-grid">
+                <div class="insight-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Future of Education" class="insight-image">
+                    <div class="insight-content">
+                        <h3>The Future of Education Post-Pandemic</h3>
+                        <div class="insight-meta">
+                            <span><i class="far fa-calendar"></i> May 15, 2023</span>
+                            <span><i class="far fa-file"></i> Research Report</span>
+                        </div>
+                        <p>An analysis of how global education systems are evolving and adapting to new realities in the wake of recent disruptions.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="insight-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Economic Impact" class="insight-image">
+                    <div class="insight-content">
+                        <h3>Measuring the Economic Impact of Education</h3>
+                        <div class="insight-meta">
+                            <span><i class="far fa-calendar"></i> April 28, 2023</span>
+                            <span><i class="far fa-file"></i> Analysis</span>
+                        </div>
+                        <p>Exploring methodologies for quantifying the return on investment in education initiatives and programs.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="insight-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://i.postimg.cc/mrzDw055/Sustainable-Models.png?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Sustainable Models" class="insight-image">
+                    <div class="insight-content">
+                        <h3>Sustainable Business Models for Educational Institutions</h3>
+                        <div class="insight-meta">
+                            <span><i class="far fa-calendar"></i> March 10, 2023</span>
+                            <span><i class="far fa-file"></i> Case Study</span>
+                        </div>
+                        <p>Case studies of educational organizations that have successfully implemented innovative and sustainable revenue models.</p>
+                        <a href="#" class="read-more">Read Article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" style="background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our services, programs, and approach.</p>
+            </div>
+            
+            <div class="accordion-container" data-aos="fade-up">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        What types of organizations does EBEC work with?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>EBEC collaborates with a diverse range of organizations including K-12 schools, higher education institutions, government agencies, non-profits, and private sector companies involved in education. Our clients span across six continents and represent both public and private sectors.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        How do your consulting services differ from other education consultants?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>EBEC uniquely integrates business strategy, economic analysis, and educational expertise. We combine data-driven insights with practical implementation support, ensuring our recommendations are both economically sound and educationally effective. Our team includes former educators, economists, and business strategists.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Are your programs available internationally?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, our programs are designed for a global audience. We offer both online and in-person options, with regional adaptations to address local contexts and challenges. We've successfully delivered programs in over 40 countries and offer multilingual support for key initiatives.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        What is the typical duration of a consulting engagement?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Engagements vary based on scope and complexity, typically ranging from 3-month strategic assessments to 2-year implementation partnerships. We begin with a discovery phase to understand your needs and propose a customized engagement timeline and deliverables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Ready to Transform Your Educational Impact?</h2>
+            <p>Join hundreds of institutions and organizations worldwide that have partnered with EBEC to enhance their educational outcomes and economic sustainability.</p>
+            <a href="#contact" class="cta-button secondary">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="https://www.ebec.co/assets/img/logo.png" alt="EBEC Logo">
+                    <p>Educational Business & Economic Consulting (EBEC) provides strategic insights and innovative solutions to educational institutions, governments, and organizations worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#insights">Insights</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Educational Consulting</a></li>
+                        <li><a href="#">Business Development</a></li>
+                        <li><a href="#">Economic Research</a></li>
+                        <li><a href="#">Training Programs</a></li>
+                        <li><a href="#">Strategic Planning</a></li>
+                        <li><a href="#">Impact Assessment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Stay Informed</h3>
+                    <p>Subscribe to our newsletter for the latest insights, research, and updates from EBEC.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-button">Subscribe</button>
+                    </form>
+                    <p style="margin-top: 20px; font-size: 0.9rem;">
+                        <i class="fas fa-map-marker-alt"></i> 123 Education Ave, Suite 500<br>
+                        New York, NY 10001, USA<br>
+                        <i class="fas fa-phone"></i> +1 (555) 123-4567<br>
+                        <i class="fas fa-envelope"></i> info@ebec.co
+                    </p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 EBEC - Educational Business & Economic Consulting. All rights reserved By Zannatul.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+            
+            // Initialize Swiper
+            const swiper = new Swiper('.program-slider', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2
+                    },
+                    1024: {
+                        slidesPerView: 3
+                    }
+                }
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Accordion functionality
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isActive = header.classList.contains('active');
+                    
+                    // Close all accordion items
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        item.style.maxHeight = null;
+                    });
+                    
+                    document.querySelectorAll('.accordion-header').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // If it wasn't active, open this one
+                    if (!isActive) {
+                        header.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+            
+            // Open first accordion item by default
+            if (accordionHeaders.length > 0) {
+                accordionHeaders[0].click();
+            }
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.padding = '0';
+                    document.querySelector('.logo img').style.height = '35px';
+                } else {
+                    header.style.padding = '';
+                    document.querySelector('.logo img').style.height = '45px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
